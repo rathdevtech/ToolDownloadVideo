@@ -1,7 +1,7 @@
 import os
 import threading
 import yt_dlp
-from yt_dlp.networking.impersonate import ImpersonateTarget
+from yt_dlp.utils import DownloadError
 
 class CancelledError(Exception):
     """Exception raised to abort download when cancelled by the user."""
@@ -45,7 +45,7 @@ class DownloadManager:
             'outtmpl': os.path.join(output_dir, '%(title)s.%(ext)s'),
             'restrictfilenames': False,
             'noplaylist': not is_playlist,
-            'impersonate': ImpersonateTarget.from_str('chrome'),
+            'impersonate': 'chrome',
             'no_warnings': True,
         }
 

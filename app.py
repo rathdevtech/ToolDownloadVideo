@@ -327,5 +327,15 @@ class VideoDownloaderApp(ctk.CTk):
         dialog.destroy()
 
 if __name__ == "__main__":
-    app = VideoDownloaderApp()
-    app.mainloop()
+    try:
+        app = VideoDownloaderApp()
+        app.mainloop()
+    except Exception as e:
+        import traceback
+        with open("crash.log", "w") as f:
+            f.write(traceback.format_exc())
+        import tkinter as tk
+        from tkinter import messagebox
+        root = tk.Tk()
+        root.withdraw()
+        messagebox.showerror("Startup Error", f"The app crashed:\n{e}\n\nSee crash.log for details.")
